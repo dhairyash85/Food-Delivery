@@ -13,6 +13,7 @@ app.use((req, res, next)=>{
 })
 app.use(express.json())
 app.use('/api', require("./routes/CreateUser"))
+app.use('/api', require("./routes/DisplayItem"))
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`)
 })

@@ -1,13 +1,14 @@
 import React from "react";
 
-export default function Card() {
+export default function Card(props) {
+  const {title, url, description, options} = props
   return (
     <div>
       <div className="card mt-3" style={{ width: "18rem", maxHeight: "360px" }}>
-        <img src="https://source.unsplash.com/random/300×300/?momos" className="card-img-top" alt="..."  style={{objectFit : "contain !important", maxHeight: "200px"}}/>
+        <img src={url} className="card-img-top" alt="..."  style={{objectFit : "contain !important", maxHeight: "200px"}}/>
         <div className="card-body">
-          <h5 className="card-title">Card title</h5>
-          <p className="card-text">lorem ispum</p>
+          <h5 className="card-title">{title}</h5>
+          <p className="card-text">{description}</p>
           <div className="container w-100">
             <select className="m-2 h-100 bg-success rounded">
               {Array.from(Array(6), (e, i) => {

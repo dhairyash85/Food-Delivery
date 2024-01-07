@@ -11,13 +11,17 @@ const connectToMongo=async()=> {
         mongoose.connection.on('reconnected', () => console.log('reconnected'));
         mongoose.connection.on('disconnecting', () => console.log('disconnecting'));
         mongoose.connection.on('close', () => console.log('close'));
-        await mongoose.connect(mongoURI)
-
-        const fetched_data= mongoose.connection.db.collection("food_items")
-        await fetched_data.find({}).toArray(function(err, data){
-            if(err) console.log("error", err, "error")
-            else console.log(data)
+        var connection=mongoose.connection
+        connection.once('open', async()=>{
+          // console.log("yyyyyyy")
+          const items  =connection.db.collection("food_items");
+          const category  =connection.db.collection("food_category");
+          global.food_items=await items.find({}).toArray()
+          global.food_category=await category.find({}).toArray()
+          // console.log(global.food_items)
+          
         })
+        await mongoose.connect(mongoURI)
       } catch (error) {
         console.log(error, "err");
       }
